@@ -10,7 +10,10 @@ public class User {
 	private ResultSet rs;		// query result
 	private String sql;			// query를 담을 String타입 변수
 	
-	
+	// 회원가입
+	public void signUp() {
+		System.out.println("test");
+	}
 	
 	
 	
