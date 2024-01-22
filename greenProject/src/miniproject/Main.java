@@ -3,6 +3,7 @@ package miniproject;
 import java.util.Scanner;
 
 import db.quiz.Quiz;
+import db.user.User;
 import style.Font;
 
 public class Main {
