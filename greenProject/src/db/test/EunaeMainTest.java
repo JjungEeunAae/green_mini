@@ -8,6 +8,7 @@ import style.Font;
 public class EunaeMainTest {
 	public static void main(String[] args) {
 		User user = new User();
+		Test test = new Test();
 		Scanner sc = new Scanner(System.in);
 		String id = "";
 
@@ -99,8 +100,7 @@ public class EunaeMainTest {
 							default:
 								System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED
 										+ "메뉴 외의 번호를 입력하셨습니다. 다시 입력해주세요!" + Font.RESET);
-							}
-							;
+							};
 
 							break;
 						case 2:
@@ -113,7 +113,8 @@ public class EunaeMainTest {
 							int rankCategory = sc.nextInt();
 							switch (rankCategory) {
 							case 1: // 목록조회
-
+								test.rankRead();
+								break;
 							case 9:
 								System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN
 										+ "=================[ 이전메뉴로 돌아갑니다. ]=================" + Font.RESET);
@@ -124,40 +125,60 @@ public class EunaeMainTest {
 							}
 							break;
 						case 3:
-							// 방명록 기능(소분류 넣어야 함)
-							System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN
-									+ "                        방 명 록                        " + Font.RESET);
-							System.out.println(" -----------------[ 메뉴를 선택해주세요 ]------------------");
-							System.out.println("1.목록조회 | 2.등록 | 3.삭제 | 8.로그아웃 | 9.이전메뉴 | 0.종료");
-							System.out.println(" ------------------------------------------------------");
-							int boardCategory = sc.nextInt();
-							switch (boardCategory) {
-							case 1: // 목록조회
-
-								break;
-							case 2: // 글 등록
-
-								break;
-							case 3: // 글 삭제
-
-								break;
-							case 8: // 로그아웃
-								System.out.println(Font.BACKGROUND_WHITE + Font.FONT_BLUE
-										+ "           [ 로그아웃 완료! ]          " + Font.RESET);
-								break mLoop;
-							case 9: // 이전메뉴
 								System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN
-										+ "=================[ 이전메뉴로 돌아갑니다. ]=================" + Font.RESET);
-								break;
-							case 0: // 종료
-								System.out.println(Font.BACKGROUND_WHITE + Font.FONT_RED
-										+ "=================[ 프로그램을 종료합니다. ]=================" + Font.RESET);
-								break loop;
-							default:
-								System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED
-										+ "메뉴 외의 번호를 입력하셨습니다. 다시 입력해주세요!" + Font.RESET);
-							};
-
+										+ "                        방 명 록                        " + Font.RESET);
+								System.out.println(" -----------------[ 메뉴를 선택해주세요 ]------------------");
+								System.out.println("1.목록조회 | 2.등록 | 3.삭제 | 8.로그아웃 | 9.이전메뉴 | 0.종료");
+								System.out.println(" ------------------------------------------------------");
+								
+								int boardCategory = sc.nextInt();
+								
+								switch (boardCategory) {
+									case 1: // 목록조회
+										test.guestBookRead();
+										break;
+									case 2: // 글 등록
+										System.out.println(id + "님, 게시글 등록이 시작됩니다.");
+										System.out.println("제목을 입력해주세요.");
+										String title = sc.next();
+										System.out.println("내용을 입력해주세요.");
+										String content = sc.next();
+										
+										if(test.guestBookInsert(id, title, content) > 0) {
+											System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN + "=============[ 정상적으로 글이 등록되었습니다. ]=============" + Font.RESET);
+										} else {
+											System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED
+													+ "오류발생! 등록이 정상적으로 진행되지 않았습니다." + Font.RESET);
+										}
+										break;
+									case 3: // 글 삭제
+										test.deleteGuestBookList(id);
+										System.out.println("어떤 글을 삭제하겠습니까?");
+										int deleteNumber = sc.nextInt();
+										int deleteResult = test.guestBookDelete(id, deleteNumber);
+										if(deleteResult > 0) {
+											System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN + "=============[ 정상적으로 글이 삭제되었습니다. ]=============" + Font.RESET);
+										} else {
+											System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED
+													+ "글번호가 올바르지 않습니다!" + Font.RESET);
+										}
+										break;
+									case 8: // 로그아웃
+										System.out.println(Font.BACKGROUND_WHITE + Font.FONT_BLUE
+												+ "           [ 로그아웃 완료! ]          " + Font.RESET);
+										break mLoop;
+									case 9: // 이전메뉴
+										System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN
+												+ "=================[ 이전메뉴로 돌아갑니다. ]=================" + Font.RESET);
+										break;
+									case 0: // 종료
+										System.out.println(Font.BACKGROUND_WHITE + Font.FONT_RED
+												+ "=================[ 프로그램을 종료합니다. ]=================" + Font.RESET);
+										break loop;
+									default:
+										System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED
+												+ "메뉴 외의 번호를 입력하셨습니다. 다시 입력해주세요!" + Font.RESET);
+								};
 							break;
 						case 8:
 							System.out.println(Font.BACKGROUND_WHITE + Font.FONT_BLUE

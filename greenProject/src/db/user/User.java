@@ -33,7 +33,7 @@ public class User {
 	public String login(String id, String pw) {
 		try {
 			conn = DriverManager.getConnection(DBConnection.JDBC_URL, DBConnection.USERNAME, DBConnection.PASSWORD);
-			sql = "SELECT * FROM test WHERE id = ?";
+			sql = "SELECT * FROM member WHERE id = ?";
 			PreparedStatement pre = conn.prepareStatement(sql);
 			// 파라미터 설정
 			pre.setString(1, id);
@@ -75,9 +75,9 @@ public class User {
 		int result = 0;
 		try {
 			conn = DriverManager.getConnection(DBConnection.JDBC_URL, DBConnection.USERNAME, DBConnection.PASSWORD);
-			sql = "UPDATE test "
-				+ "SET state = 1 "
-				+ "WHERE id = ?";
+			sql = "UPDATE member "
+				+ "   SET state = 1 "
+				+ " WHERE id = ?";
 			PreparedStatement pre = conn.prepareStatement(sql);
 			// 파라미터 설정
 			pre.setString(1, id);
