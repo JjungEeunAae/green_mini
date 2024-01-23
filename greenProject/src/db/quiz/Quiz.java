@@ -27,8 +27,8 @@ public class Quiz {
 		Collections.shuffle(colors);
 
 		String[][] colorHint = { { "딸기", "사과", "장미" }, { "오렌지", "감", "당근"}, { "레몬", "개나리","바나나" }, { "잔디","에메랄드","대나무" },
-				{ "벚꽃", "플라밍고", "딸기우유" }, { "낙옆", "벽돌", "나뭇가지" }, { "가지", "포도", "라일락", }, { "우유", "국화", "북극곰" }, { "아스팔트", "밤하늘", "검" },
-				{ "회", "회", "회" } };
+				{ "벚꽃", "플라밍고", "딸기우유" }, { "낙옆", "벽돌", "나뭇가지" }, { "가지", "포도", "라일락", }, { "우유", "국화", "북극곰" }, { "아스팔트", "밤하늘", "까마귀" },
+				{ "시멘트", "비둘기", "쥐" } };
 
 		for (int i = 0; i < color.length; i++) {
 			for (int j = 0; j < color[i].length(); j++) {
@@ -159,7 +159,7 @@ public class Quiz {
 						}
 						continue;
 					}
-				} else if (color[i].equals("파란색")) {
+				} else if (color[i].equals("분홍색")) {
 					System.out.println("힌트 : " + colorHint[4][j]);
 					System.out.println("정답입력");
 
@@ -183,7 +183,7 @@ public class Quiz {
 						}
 						continue;
 					}
-				} else if (color[i].equals("남색")) {
+				} else if (color[i].equals("갈색")) {
 					System.out.println("힌트 : " + colorHint[5][j]);
 					System.out.println("정답입력");
 
@@ -313,14 +313,14 @@ public class Quiz {
 		String answer;
 		int tscore = 0;
 
-		String[] animal = { "강아지", "고양이", "말", "사자", "코끼리", "원숭이", "곰", "사슴", "돌고래", "기린" };
+		String[] animal = { "강아지", "고양이", "말", "사자", "코끼리", "원숭이", "곰", "사슴", "고래", "새" };
 
 		List<String> animals = Arrays.asList(animal);
 		Collections.shuffle(animals);
 
-		String[][] animalHint = { { "개", "개", "개" }, { "고양이", "고양이", "고양이" }, { "말", "말", "말" }, { "사자", "사자", "사자" },
-				{ "코끼리", "코끼리", "코끼리" }, { "원숭이", "원숭이", "원숭이" }, { "곰", "곰", "곰" }, { "사슴", "사슴", "사슴" },
-				{ "돌고래", "돌고래", "돌고래" }, { "기린", "기린", "기린" } };
+		String[][] animalHint = { { "리트리버", "푸들", "허스키" }, { "페르시안", "샴", "러시안블루" }, { "토로버드", "아라비안", "쿼터마일" }, { "코드바", "아스티커", "커버트" },
+				{ "인도", "아프리카", "뱀베" }, { "침팬지", "고릴라", "오랑우탄" }, { "북극", "불", "반달가슴" }, { "엘크", "수프", "시카" },
+				{ "흰수염", "범", "청수염" }, { "비둘기", "까마귀", "부엉이" } };
 		
 		for (int i = 0; i < animal.length; i++) {
 			for (int j = 0; j < animal[i].length(); j++) {
@@ -601,7 +601,7 @@ public class Quiz {
 						}
 						continue;
 					}
-				} else if (animal[i].equals("돌고래")) {
+				} else if (animal[i].equals("고래")) {
 					System.out.println("힌트 : " + animalHint[8][j]);
 					System.out.println("정답입력");
 
@@ -634,7 +634,7 @@ public class Quiz {
 						}
 						continue;
 					}
-				} else if (animal[i].equals("기린")) {
+				} else if (animal[i].equals("새")) {
 					System.out.println("힌트 : " + animalHint[9][j]);
 					System.out.println("정답입력");
 
@@ -677,14 +677,14 @@ public class Quiz {
 		String answer;
 		int tscore = 0;
 
-		String[] food = { "피자", "파스타", "삼겹살", "초밥", "햄버거", "간짜장", "스테이크", "떡볶이", "샐러드", "아이스크림" };
+		String[] food = { "피자", "파스타", "치킨", "초밥", "햄버거", "라면", "스테이크", "떡볶이", "샐러드", "아이스크림" };
 
 		List<String> foods = Arrays.asList(food);
 		Collections.shuffle(foods);
 
-		String[][] foodHint = { { "피자", "피자", "피자" }, { "햄버거스타", "햄버거스타", "햄버거스타" }, { "삼겹살", "삼겹살", "삼겹살" },
-				{ "초밥", "초밥", "초밥" }, { "햄버거", "햄버거", "햄버거" }, { "간짜장", "간짜장", "간짜장" }, { "스테이크", "스테이크", "스테이크" },
-				{ "떡볶이", "떡볶이", "떡볶이" }, { "샐러드", "샐러드", "샐러드" }, { "아이스크림", "아이스크림", "아이스크림" } };
+		String[][] foodHint = { { "콤비네이션", "포테이토", "고구마" }, { "봉골레", "알리오올리오", "까르보나라" }, { "후라이드", "양념", "간장" },
+				{ "장어", "연어", "새우" }, { "불고기", "치즈", "빅맥" }, { "안성탕면", "신라면", "불닭볶음면" }, { "웰던", "미디움", "레어" },
+				{ "로제", "짜장", "라볶이" }, { "야채", "다이어트", "드레싱" }, { "엔초", "월드콘", "투게더" } };
 		
 		for (int i = 0; i < food.length; i++) {
 			for (int j = 0; j < food[i].length(); j++) {
@@ -749,7 +749,7 @@ public class Quiz {
 						}
 						continue;
 					}
-				} else if (food[i].equals("삼겹살")) {
+				} else if (food[i].equals("치킨")) {
 					System.out.println("힌트 : " + foodHint[2][j]);
 					System.out.println("정답입력");
 
@@ -821,7 +821,7 @@ public class Quiz {
 						}
 						continue;
 					}
-				} else if (food[i].equals("간짜장")) {
+				} else if (food[i].equals("라면")) {
 					System.out.println("힌트 : " + foodHint[5][j]);
 					System.out.println("정답입력");
 
