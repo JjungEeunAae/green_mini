@@ -1,7 +1,9 @@
 package db.test;
 
+import java.lang.reflect.Member;
 import java.util.Scanner;
 
+import db.quiz.Quiz;
 import db.user.User;
 import style.Font;
 
@@ -9,6 +11,7 @@ public class EunaeMainTest {
 	public static void main(String[] args) {
 		User user = new User();
 		Test test = new Test();
+		Quiz quiz = new Quiz();
 		Scanner sc = new Scanner(System.in);
 		String id = "";
 
@@ -75,13 +78,13 @@ public class EunaeMainTest {
 							int gameCategory = sc.nextInt(); // 메뉴 번호 입력받기
 							switch (gameCategory) { // 입력받은 값으로 기능 굴리기
 							case 1: // 색상
-
+								quiz.color();
 								break;
 							case 2: // 동물
-
+								quiz.animal();
 								break;
 							case 3: // 음식
-
+								quiz.food();
 								break;
 							case 8: // 로그아웃
 								System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN + "      [ 로그아웃 완료! ]     "
@@ -271,7 +274,20 @@ public class EunaeMainTest {
 				}
 				break;
 			case 2: // 회원가입
-
+				MemberTest member = new MemberTest();
+				System.out.println("회원가입 진행");
+				System.out.println("아이디 입력>");
+				String sign_id = sc.next();
+				System.out.println("비번 입력>");
+				String sign_pw = sc.next();
+				System.out.println("이름 입력>");
+				String sign_name = sc.next();
+				
+				member.setId(sign_id);
+				member.setPw(sign_pw);
+				member.setName(sign_name);
+				
+				test.signUp(member);
 				break;
 			default:
 				System.out

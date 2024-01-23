@@ -16,9 +16,6 @@ public class Test {
 	private String sql;
 	private PreparedStatement pre;
 	
-	//564165465465454
-	
-	
 	public void test(String a, String b) {
 		try {
 			conn = DriverManager.getConnection(DBConnection.JDBC_URL, DBConnection.USERNAME, DBConnection.PASSWORD);
@@ -185,4 +182,32 @@ public class Test {
 			return 0;
 		}
 	}
+	
+	// 회원등록
+	public void signUp(MemberTest member) {
+		int result = 0;
+		try {
+			conn = DriverManager.getConnection(DBConnection.JDBC_URL, DBConnection.USERNAME, DBConnection.PASSWORD);
+			sql = "INSERT INTO member (id, pw, name, state, sign_date) "
+				+ "VALUES (?,?,?,0,NOW())";
+			pre = conn.prepareStatement(sql);
+			pre.setString(1, member.getId());
+			pre.setString(2, member.getPw());
+			pre.setString(3, member.getName());
+			
+			result = pre.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if(result > 0) {
+			System.out.println("회원등록이 완료되었습니다.");
+		} else {
+			System.out.println("등록실패");
+		}
+	}
+	
+	
+	
 }
