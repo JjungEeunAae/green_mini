@@ -1,7 +1,10 @@
 package db.test;
 
 import java.lang.reflect.Member;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import db.quiz.Quiz;
 import db.user.User;
@@ -11,7 +14,6 @@ public class EunaeMainTest {
 	public static void main(String[] args) {
 		User user = new User();
 		Test test = new Test();
-		Quiz quiz = new Quiz();
 		Scanner sc = new Scanner(System.in);
 		String id = "";
 
@@ -78,13 +80,13 @@ public class EunaeMainTest {
 							int gameCategory = sc.nextInt(); // 메뉴 번호 입력받기
 							switch (gameCategory) { // 입력받은 값으로 기능 굴리기
 							case 1: // 색상
-								quiz.color();
+								test.quizPrint("색상", id);
 								break;
 							case 2: // 동물
-								quiz.animal();
+								test.quizPrint("동물", id);
 								break;
 							case 3: // 음식
-								quiz.food();
+								test.quizPrint("음식", id);
 								break;
 							case 8: // 로그아웃
 								System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN + "      [ 로그아웃 완료! ]     "
