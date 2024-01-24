@@ -1,18 +1,22 @@
-package db.test;
+package db.user;
 
-public class MemberTest {
+public class UserVO {
 	private String id;
 	private String pw;
 	private String name;
 	
-	public void MamberTest() {};
-	
-	public void MamberTest(String id, String pw, String name, int state) {
+	public UserVO() {};
+
+	public UserVO(String id, String pw, String name) {
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
 	}
-
+	
+	public UserVO(String id, String pw) {
+		this.id = id;
+		this.pw = pw;
+	}
 
 	public String getId() {
 		return id;

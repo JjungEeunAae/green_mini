@@ -14,6 +14,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import db.DBConnection;
+import db.user.UserVO;
 import style.Font;
 
 public class Test {
@@ -204,7 +205,7 @@ public class Test {
 	}
 	
 	// 회원가입
-	public void signUp(MemberTest member) {
+	public void signUp(UserVO member) {
 		int result = 0;
 		
 		boolean findByid = findById(member.getId());

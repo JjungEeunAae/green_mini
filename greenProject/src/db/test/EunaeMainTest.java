@@ -1,12 +1,9 @@
 package db.test;
 
-import java.lang.reflect.Member;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
-import db.quiz.Quiz;
+import db.user.UserVO;
+import db.input.InfoInput;
 import db.user.User;
 import style.Font;
 
@@ -15,7 +12,7 @@ public class EunaeMainTest {
 		User user = new User();
 		Test test = new Test();
 		Scanner sc = new Scanner(System.in);
-		String id = "";
+		InfoInput input = new InfoInput();
 
 		System.out.println("  _   _   U _____ u    _         _         U  ___ u \r\n"
 				+ " |'| |'|  \\| ___\"|/   |\"|       |\"|         \\/\"_ \\/ \r\n"
@@ -38,19 +35,15 @@ public class EunaeMainTest {
 			case 1:
 				// 로그인
 				System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN + "         [ LOGIN ]         " + Font.RESET);
-				System.out.println("아이디를 입력해주세요.");
-				id = sc.next();
-				System.out.println("비밀번호를 입력해주세요.");
-				String pw = sc.next();
+				UserVO mem = input.loginInput();
 
-				String login_result = user.login(id, pw);
+				String login_result = user.login(mem.getId(), mem.getPw());
 
 				switch (login_result) {
 				case "SIGNOUT_USER": // 회원탈퇴
 					System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED + "탈퇴한 아이디입니다. 다시 확인 바랍니다." + Font.RESET);
 					break;
 				case "SUCCESS": // 로그인성공
-					// 1-2.성공적으로 로그인 되었을 때
 					System.out.println("  ____       _____       _         ____       _____   \r\n"
 							+ " / __\"| u   |_ \" _|  U  /\"\\  u  U |  _\"\\ u   |_ \" _|  \r\n"
 							+ "<\\___ \\/      | |     \\/ _ \\/    \\| |_) |/     | |    \r\n"
@@ -60,7 +53,7 @@ public class EunaeMainTest {
 							+ " (__)      (__) (__) (__)  (__)  (__)  (__) (__) (__) ");
 					System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN
 							+ "                      로그인 성공!                       " + Font.RESET);
-					System.out.println(Font.BACKGROUND_WHITE + Font.FONT_BLUE + "==================[ " + id
+					System.out.println(Font.BACKGROUND_WHITE + Font.FONT_BLUE + "==================[ " + mem.getId()
 							+ "님 환영합니다. ]===================" + Font.RESET);
 					mLoop: while (true) {
 						// 단어맞추기 랭킹 방명록 로그아웃 회원탈퇴 종료
@@ -80,13 +73,13 @@ public class EunaeMainTest {
 							int gameCategory = sc.nextInt(); // 메뉴 번호 입력받기
 							switch (gameCategory) { // 입력받은 값으로 기능 굴리기
 							case 1: // 색상
-								test.quizPrint("색상", id);
+								test.quizPrint("색상", mem.getId());
 								break;
 							case 2: // 동물
-								test.quizPrint("동물", id);
+								test.quizPrint("동물", mem.getId());
 								break;
 							case 3: // 음식
-								test.quizPrint("음식", id);
+								test.quizPrint("음식", mem.getId());
 								break;
 							case 8: // 로그아웃
 								System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN + "      [ 로그아웃 완료! ]     "
@@ -143,13 +136,13 @@ public class EunaeMainTest {
 										test.guestBookRead();
 										break;
 									case 2: // 글 등록
-										System.out.println(id + "님, 게시글 등록이 시작됩니다.");
+										System.out.println(mem.getId() + "님, 게시글 등록이 시작됩니다.");
 										System.out.println("제목을 입력해주세요.");
 										String title = sc.next();
 										System.out.println("내용을 입력해주세요.");
 										String content = sc.next();
 										
-										if(test.guestBookInsert(id, title, content) > 0) {
+										if(test.guestBookInsert(mem.getId(), title, content) > 0) {
 											System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN + "=============[ 정상적으로 글이 등록되었습니다. ]=============" + Font.RESET);
 										} else {
 											System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED
@@ -157,10 +150,10 @@ public class EunaeMainTest {
 										}
 										break;
 									case 3: // 글 삭제
-										test.deleteGuestBookList(id);
+										test.deleteGuestBookList(mem.getId());
 										System.out.println("어떤 글을 삭제하겠습니까?");
 										int deleteNumber = sc.nextInt();
-										int deleteResult = test.guestBookDelete(id, deleteNumber);
+										int deleteResult = test.guestBookDelete(mem.getId(), deleteNumber);
 										if(deleteResult > 0) {
 											System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN + "=============[ 정상적으로 글이 삭제되었습니다. ]=============" + Font.RESET);
 										} else {
@@ -197,17 +190,17 @@ public class EunaeMainTest {
 							switch (userCategory) {
 							case 1:
 								int random = (int) (Math.random() * 555) + 1;
-
 								System.out.println("비밀번호를 입력해주세요.");
 								String pwCheck = sc.next();
 
-								String signOut_result = user.login(id, pwCheck);
+								String signOut_result = user.login(mem.getId(), pwCheck);
 								switch (signOut_result) {
 								case "WRONG_PASSWORD":
 									System.out.println(
 											Font.BACKGROUND_BLACK + Font.FONT_RED + "비밀번호가 일치하지 않습니다." + Font.RESET);
 									break;
 								case "SUCCESS":
+									
 									System.out.println("탈퇴 진행을 위해 번호를 입력해주세요.");
 									System.out.println("입력하기 >> [  " + random + "  ]");
 									int randomNumberCheck = sc.nextInt();
@@ -230,7 +223,7 @@ public class EunaeMainTest {
 										}
 									} else {
 										// 모든 값이 정상적으로 들어오면 탈퇴 진행 및 대분류 카테고리 이동
-										int result = user.signOut(id);
+										int result = user.signOut(mem.getId());
 
 										if (result > 0) {
 											System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN
@@ -276,24 +269,11 @@ public class EunaeMainTest {
 				}
 				break;
 			case 2: // 회원가입
-				MemberTest member = new MemberTest();
-				System.out.println("회원가입 진행");
-				System.out.println("아이디 입력>");
-				String sign_id = sc.next();
-				System.out.println("비번 입력>");
-				String sign_pw = sc.next();
-				System.out.println("이름 입력>");
-				String sign_name = sc.next();
-				
-				member.setId(sign_id);
-				member.setPw(sign_pw);
-				member.setName(sign_name);
-				
+				UserVO member = input.signUpInput();
 				test.signUp(member);
 				break;
 			default:
-				System.out
-						.println(Font.BACKGROUND_BLACK + Font.FONT_RED + "메뉴 외의 번호를 입력하셨습니다. 다시 입력해주세요!" + Font.RESET);
+				System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED + "메뉴 외의 번호를 입력하셨습니다. 다시 입력해주세요!" + Font.RESET);
 			}
 
 		};
