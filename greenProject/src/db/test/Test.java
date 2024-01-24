@@ -53,27 +53,23 @@ public class Test {
 			sql = "SELECT CASE "
 				+ "			WHEN state = 1 THEN '탈퇴회원' "
 				+ "			ELSE g.id "
-				+ "		   END AS \"id\""
+				+ "		   END AS \"id\" "
 				+ "     , title "
 				+ "     , content "
 				+ "	    , DATE_FORMAT(write_date, '%Y-%m-%d') AS \"write_date\" "
-				+ "  FROM guest_book g"
+				+ "  FROM guest_book g "
 				+ "  JOIN member m "
 				+ "    ON g.id = m.id "
 				+ " ORDER BY write_date";
-			try {
+			
 				stmt = conn.createStatement();
 				rs = stmt.executeQuery(sql);
 				
-				if(rs.next()) {
-					System.out.println("[아이디]\t[제목]\t[내용]\t  [등록일]");
-					while (rs.next()) {
-						System.out.println(rs.getString("id") + "\t" + rs.getString("title") + "\t" + rs.getString("content") + "\t" + rs.getString("write_date"));
-					}
+				System.out.println("[아이디]\t[제목]\t[내용]\t  [등록일]");
+				while (rs.next()) {
+					System.out.println(rs.getString("id") + "\t" + rs.getString("title") + "\t" + rs.getString("content") + "\t" + rs.getString("write_date"));
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+				System.out.println();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -87,27 +83,24 @@ public class Test {
 			sql = "SELECT CASE "
 				+ "			WHEN state = 1 THEN '탈퇴회원' "
 				+ "			ELSE r.id "
-				+ "		END AS \"id\""
+				+ "		END AS \"id\" "
 				+ "	    , score "
 				+ "     , DATE_FORMAT(in_date, '%Y-%m-%d') AS \"in_date\" "
-				+ "  FROM `rank` r"
-				+ "  JOIN member m"
-				+ "    ON r.id = m.id"
+				+ "  FROM `rank` r "
+				+ "  JOIN member m "
+				+ "    ON r.id = m.id "
 				+ " ORDER BY score DESC "
 				+ " LIMIT 0,10";
 			try {
 				stmt = conn.createStatement();
 				rs = stmt.executeQuery(sql);
 				
-				if(rs.next()) {
-					System.out.println("❤️랭크는 10등까지만 보입니다❤️");
-					System.out.println("[id]\t[점수] \t  [등록일]");
-					while(rs.next()) {
-						System.out.println(rs.getString("id") + "\t " + rs.getString("score") + "점\t " + rs.getString("in_date"));
-					}
-				} else {
-					System.out.println("결과가 없습니다.");
+				System.out.println("❤️랭크는 10등까지만 보입니다❤️");
+				System.out.println("[id]\t[점수] \t  [등록일]");
+				while(rs.next()) {
+					System.out.println(rs.getString("id") + "\t " + rs.getString("score") + "점\t " + rs.getString("in_date"));
 				}
+				System.out.println();
 			} catch (Exception e) {
 				e.printStackTrace();
 			};
@@ -190,28 +183,55 @@ public class Test {
 		}
 	}
 	
-	// 회원등록
-	public void signUp(MemberTest member) {
-		int result = 0;
+	// 회원가입전에 아이디 중복체크하기
+	public boolean findById(String id) {
 		try {
 			conn = DriverManager.getConnection(DBConnection.JDBC_URL, DBConnection.USERNAME, DBConnection.PASSWORD);
-			sql = "INSERT INTO member (id, pw, name, state, sign_date) "
-				+ "VALUES (?,?,?,0,NOW())";
+			sql = "SELECT * FROM member WHERE id = ?";
 			pre = conn.prepareStatement(sql);
-			pre.setString(1, member.getId());
-			pre.setString(2, member.getPw());
-			pre.setString(3, member.getName());
+			pre.setString(1, id);
 			
-			result = pre.executeUpdate();
+			rs = pre.executeQuery();
 			
-		} catch (SQLException e) {
+			if(rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		if(result > 0) {
-			System.out.println("회원등록이 완료되었습니다.");
+		return false;
+	}
+	
+	// 회원가입
+	public void signUp(MemberTest member) {
+		int result = 0;
+		
+		boolean findByid = findById(member.getId());
+		
+		if(!findByid) {	// 중복된 아이디가 없으면 회원가입 진행
+			try {
+				conn = DriverManager.getConnection(DBConnection.JDBC_URL, DBConnection.USERNAME, DBConnection.PASSWORD);
+				sql = "INSERT INTO member (id, pw, name, state, sign_date) "
+					+ "VALUES (?,?,?,0,NOW())";
+				pre = conn.prepareStatement(sql);
+				pre.setString(1, member.getId());
+				pre.setString(2, member.getPw());
+				pre.setString(3, member.getName());
+				
+				result = pre.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			if(result > 0) {
+				System.out.println("회원등록이 완료되었습니다.");
+			} else {
+				System.out.println("등록실패");
+			}
 		} else {
-			System.out.println("등록실패");
+			System.err.println("중복된 아이디가 있어 회원가입이 불가합니다.");
 		}
 	}
 	
