@@ -6,8 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
 import db.DBConnection;
+import db.input.InfoInput;
+import style.Font;
 
 public class User {
 	private Connection conn;	// data base connection
@@ -94,8 +97,6 @@ public class User {
 			return 0;
 		}
 	}
-	
-	
 	
 	
 	
