@@ -65,9 +65,16 @@ public class User {
                     return "USER_NOT_FOUND";
                 }
             }
-            
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					System.err.println(e.getMessage());
+				}
+			}
 		};
 		
 		return "ERROR";
@@ -89,6 +96,14 @@ public class User {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					System.err.println(e.getMessage());
+				}
+			}
 		}
 		
 		if(result > 0) {
