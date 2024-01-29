@@ -17,6 +17,7 @@ public class User {
 	private Statement stmt;		// sql query 실행
 	private ResultSet rs;		// query result
 	private String sql;			// query를 담을 String타입 변수
+	private InfoInput input = new InfoInput();
 	
 	// 회원가입
 	public void signUp() {
@@ -30,7 +31,28 @@ public class User {
 	
 	
 	
-	
+	// 로그인 후 유저 정보 가져오기
+	public UserVO userInfo(String id, String pw) {
+		UserVO nvo = new UserVO(); 
+		try {
+			conn = DriverManager.getConnection(DBConnection.JDBC_URL, DBConnection.USERNAME, DBConnection.PASSWORD);
+			sql = "SELECT * FROM member WHERE id = ?";
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setString(1, id);
+			
+			rs = pre.executeQuery();
+			
+			if(rs.next()) {
+				nvo.setId(rs.getString("id"));
+				nvo.setPw(rs.getString("pw"));
+				nvo.setName(rs.getString("name"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return nvo;
+	}
 	
 	// 로그인 ( 은애 )
 	public String login(String id, String pw) {
@@ -65,9 +87,16 @@ public class User {
                     return "USER_NOT_FOUND";
                 }
             }
-            
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					System.err.println(e.getMessage());
+				}
+			}
 		};
 		
 		return "ERROR";
@@ -89,6 +118,14 @@ public class User {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					System.err.println(e.getMessage());
+				}
+			}
 		}
 		
 		if(result > 0) {
@@ -97,8 +134,6 @@ public class User {
 			return 0;
 		}
 	}
-	
-	
 	
 	
 	
