@@ -136,11 +136,19 @@ public class Main {
 										if (randomIntCheck) {
 											boolean randomIntDoubleCheck = input.randomIntDoubleCheck();
 											if (randomIntDoubleCheck) {
-												System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED + "틀렸습니다! 메뉴로 돌아갑니다" + Font.RESET);
+												System.out.println(Font.BACKGROUND_BLACK +
+														Font.FONT_RED + "틀렸습니다! 메뉴로 돌아갑니다" + Font.RESET);
 												break;
 											} else {
-												System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN
-														+ "                탈퇴완료! 처음으로 돌아갑니다.                " + Font.RESET);
+												int result = user.signOut(mem.getId());
+												
+												if (result > 0) {
+													System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN
+															+ "                탈퇴완료! 처음으로 돌아갑니다.                " + Font.RESET);
+												} else {
+													System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED
+															+ "             탈퇴가 정상적으로 진행되지 않았습니다!             " + Font.RESET);
+												}
 												break mLoop;
 											}
 										} else {
