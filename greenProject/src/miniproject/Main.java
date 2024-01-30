@@ -45,13 +45,13 @@ public class Main {
 								int gameMenu = menu.gameMenu();
 								switch (gameMenu) { 		 // 입력받은 값으로 기능 굴리기
 								case 1: // 색상 (●hyoungjin)
-									quiz.color();
+									quiz.color(mem.getId());
 									break;
 								case 2: // 동물 (●hyoungjin)
-									quiz.animal();
+									quiz.animal(mem.getId());
 									break;
 								case 3: // 음식 (●hyoungjin)
-									quiz.food();
+									quiz.food(mem.getId());
 									break;
 								case 8: // 로그아웃
 									System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN + "      [ 로그아웃 완료! ]     "
