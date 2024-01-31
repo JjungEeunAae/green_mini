@@ -1,7 +1,5 @@
 package miniproject;
 
-import java.util.Scanner;
-
 import db.input.InfoInput;
 import db.menuPrint.MenuPrint;
 import db.quiz.Quiz;
@@ -16,7 +14,6 @@ public class Main {
 		MenuPrint menu  = new MenuPrint();	// 메뉴가 지저분해서 클래스를 따로 생성함
 		User      user  = new User();		// 로그인, 회원가입, 탈퇴 등
 		Quiz      quiz  = new Quiz();		// 단어맞추기 게임
-		Scanner   sc    = new Scanner(System.in);
 
 		menu.wellcome();
 		loop: while (true) {
@@ -56,6 +53,7 @@ public class Main {
 								case 8: // 로그아웃
 									System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN + "      [ 로그아웃 완료! ]     "
 											+ Font.RESET);
+									user = null;
 									break mLoop;
 								case 9:
 									// 이전메뉴
@@ -102,6 +100,7 @@ public class Main {
 									case 8: // 로그아웃 (●eunae)
 										System.out.println(Font.BACKGROUND_WHITE + Font.FONT_BLUE
 												+ "           [ 로그아웃 완료! ]          " + Font.RESET);
+										user = null;
 										break mLoop;
 									case 9: // 이전메뉴
 										System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN
@@ -120,6 +119,7 @@ public class Main {
 							case 8:
 								System.out.println(Font.BACKGROUND_WHITE + Font.FONT_BLUE
 										+ "           [ 로그아웃 완료! ]          " + Font.RESET);
+								user = null;
 								break mLoop;
 							case 9: // 회원탈퇴 (●eunae)
 								int userMenu = menu.signOutMenu();
@@ -136,11 +136,19 @@ public class Main {
 										if (randomIntCheck) {
 											boolean randomIntDoubleCheck = input.randomIntDoubleCheck();
 											if (randomIntDoubleCheck) {
-												System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED + "틀렸습니다! 메뉴로 돌아갑니다" + Font.RESET);
+												System.out.println(Font.BACKGROUND_BLACK +
+														Font.FONT_RED + "틀렸습니다! 메뉴로 돌아갑니다" + Font.RESET);
 												break;
 											} else {
-												System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN
-														+ "                탈퇴완료! 처음으로 돌아갑니다.                " + Font.RESET);
+												int result = user.signOut(mem.getId());
+												
+												if (result > 0) {
+													System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN
+															+ "                탈퇴완료! 처음으로 돌아갑니다.                " + Font.RESET);
+												} else {
+													System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED
+															+ "             탈퇴가 정상적으로 진행되지 않았습니다!             " + Font.RESET);
+												}
 												break mLoop;
 											}
 										} else {
