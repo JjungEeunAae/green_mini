@@ -44,13 +44,12 @@ public class User {
 			
 			if(rs.next()) {
 				nvo.setId(rs.getString("id"));
-				nvo.setPw(rs.getString("pw"));
+				nvo.setPw(pw);
 				nvo.setName(rs.getString("name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return nvo;
 	}
 	
