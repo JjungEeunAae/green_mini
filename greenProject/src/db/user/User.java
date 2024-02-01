@@ -75,10 +75,6 @@ public class User {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
-
-=======
->>>>>>> 28c6800d9cea51788995fdbf460510f615a174a0
 		return nvo;
 	}
 
