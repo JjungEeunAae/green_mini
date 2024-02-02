@@ -31,47 +31,45 @@ public class Main {
 				String login_result = user.login(mem.getId(), mem.getPw());
 
 				switch (login_result) {
-				case "SIGNOUT_USER": // 회원탈퇴
-					System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED + "탈퇴한 아이디입니다. 다시 확인 바랍니다." + Font.RESET);
-					break;
-				case "SUCCESS": // 로그인성공
-					menu.loginSucceeAndStart(mem.getName());
-					mLoop: while (true) {
-						int middleMenu = menu.middleMenu();
-						switch (middleMenu) {
-						case 1:
-							int gameMenu = menu.gameMenu();
-							switch (gameMenu) { // 입력받은 값으로 기능 굴리기
-							case 1: // 색상 (●hyoungjin)
-								System.out.println(mem.getId());
-								quiz.color(mem.getId());
-								break;
-							case 2: // 동물 (●hyoungjin)
-								quiz.animal(mem.getId());
-								break;
-							case 3: // 음식 (●hyoungjin)
-								quiz.food(mem.getId());
-								break;
-							case 8: // 로그아웃
-								System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN + "      [ 로그아웃 완료! ]     "
-										+ Font.RESET);
-								user = null;
-								break mLoop;
-							case 9:
-								// 이전메뉴
-								System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN
-										+ "=================[ 이전메뉴로 돌아갑니다. ]=================" + Font.RESET);
-								break;
-							case 0:
-								// 종료
-								System.out.println(Font.BACKGROUND_WHITE + Font.FONT_RED
-										+ "=================[ 프로그램을 종료합니다. ]=================" + Font.RESET);
-								break loop;
-							default:
-								System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED
-										+ "메뉴 외의 번호를 입력하셨습니다. 다시 입력해주세요!" + Font.RESET);
-							}
-							;
+					case "SIGNOUT_USER": // 회원탈퇴
+						System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED + "탈퇴한 아이디입니다. 다시 확인 바랍니다." + Font.RESET);
+						break;
+					case "SUCCESS": // 로그인성공
+						menu.loginSucceeAndStart(mem.getName());
+						mLoop: while (true) {
+							int middleMenu = menu.middleMenu();
+							switch (middleMenu) {
+							case 1:
+								int gameMenu = menu.gameMenu();
+								switch (gameMenu) { 		 // 입력받은 값으로 기능 굴리기
+								case 1: // 색상 (●hyoungjin)
+									quiz.game("색상",mem.getId(),mem.getName());
+									break;
+								case 2: // 동물 (●hyoungjin)
+									quiz.game("동물",mem.getId(),mem.getName());
+									break;
+								case 3: // 음식 (●hyoungjin)
+									quiz.game("음식",mem.getId(),mem.getName());
+									break;
+								case 8: // 로그아웃
+									System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN + "      [ 로그아웃 완료! ]     "
+											+ Font.RESET);
+									user = null;
+									break mLoop;
+								case 9:
+									// 이전메뉴
+									System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN
+											+ "=================[ 이전메뉴로 돌아갑니다. ]=================" + Font.RESET);
+									break;
+								case 0:
+									// 종료
+									System.out.println(Font.BACKGROUND_WHITE + Font.FONT_RED
+											+ "=================[ 프로그램을 종료합니다. ]=================" + Font.RESET);
+									break loop;
+								default:
+									System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED
+											+ "메뉴 외의 번호를 입력하셨습니다. 다시 입력해주세요!" + Font.RESET);
+								};
 							break;
 						case 2: // 랭킹 기능
 							int rankMenu = menu.rankMenu();
