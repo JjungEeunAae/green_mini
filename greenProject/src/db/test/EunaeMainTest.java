@@ -272,8 +272,8 @@ public class EunaeMainTest {
 				}
 				break;
 			case 2: // 회원가입
-				UserVO member = input.signUpInput();
-				test.signUp(member);
+//				UserVO member = input.signUpInput();
+//				test.signUp(member);
 				break;
 			default:
 				System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED + "메뉴 외의 번호를 입력하셨습니다. 다시 입력해주세요!" + Font.RESET);
