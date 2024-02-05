@@ -2,6 +2,7 @@ package db.test;
 
 import java.util.Scanner;
 
+import db.guestBook.GuestBook;
 import db.input.InfoInput;
 import db.menuPrint.MenuPrint;
 import db.user.User;
@@ -15,6 +16,8 @@ public class EunheeMainTest {
 		User      user  = new User();
 		Test      test  = new Test();
 		Scanner   sc    = new Scanner(System.in);
+		// 1. GuestBook을 사용하기 위해 인스턴스화해준다.
+		GuestBook book = new GuestBook();
 
 		menu.wellcome();
 		
@@ -133,6 +136,8 @@ public class EunheeMainTest {
 								switch (guestBookMenu) {
 									case 1: // 목록조회
 										//test.guestBookRead();
+										// 2. 선언한 변수를 사용하여 기능을 호출한다.
+										book.listView();
 										break;
 									case 2: // 글 등록
 										System.out.println(mem.getId() + "님, 게시글 등록이 시작됩니다.");
