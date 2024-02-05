@@ -38,6 +38,7 @@ public class Main {
 				String id = sc.next();
 				System.out.println("비밀번호를 입력해주세요.");
 				String pw = sc.next();
+				
 
 				// DB에 id가 존재하지 않을 시 "존재하지않는 아이디" 출력
 				// user.setId(id) user.serPw(pw)
