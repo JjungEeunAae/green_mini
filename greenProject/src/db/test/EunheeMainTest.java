@@ -8,7 +8,7 @@ import db.user.User;
 import db.user.UserVO;
 import style.Font;
 
-public class EunaeMainTest {
+public class EunheeMainTest {
 	public static void main(String[] args) {
 		MenuPrint menu  = new MenuPrint();
 		InfoInput input = new InfoInput();
@@ -110,7 +110,7 @@ public class EunaeMainTest {
 							int rankMenu = menu.rankMenu();
 							switch (rankMenu) {
 							case 1: // 목록조회
-								test.rankRead();
+								//test.rankRead();
 								break;
 							case 9:
 								System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN
@@ -132,7 +132,7 @@ public class EunaeMainTest {
 								
 								switch (guestBookMenu) {
 									case 1: // 목록조회
-										test.guestBookRead();
+										//test.guestBookRead();
 										break;
 									case 2: // 글 등록
 										System.out.println(mem.getId() + "님, 게시글 등록이 시작됩니다.");
