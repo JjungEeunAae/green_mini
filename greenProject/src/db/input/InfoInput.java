@@ -32,13 +32,33 @@ public class InfoInput {
 			sign_id = sc.nextLine();
 			dupl = user.idCheck(sign_id);
 		}
-		System.out.println(">> 비밀번호 입력 <<");
-		String sign_pw = sc.nextLine();
+//		System.out.println(">> 비밀번호 입력 <<");
+//		String sign_pw = sc.nextLine();
+		String sign_pw = pwConfirm();
+		
 		System.out.println(">> 이름 입력 <<");
 		String sign_name = sc.nextLine();
 		user.signUp(sign_id, sign_pw, sign_name);
 
 	}
+	
+	// 비밀번호 정규식 컨펌
+	private String pwConfirm() {
+        String pwRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{4,}$";
+
+        while (true) {
+            System.out.println(">> 비밀번호 입력 (최소 4자 이상, 대소문자, 숫자, 특수문자 필수) <<");
+            String sign_pw = sc.nextLine();
+
+            // 정규식 패턴과 일치하는지 확인
+            if (sign_pw.matches(pwRegex)) {
+                return sign_pw; // 유효한 비밀번호 반환
+            } else {
+                System.out.println("비밀번호가 조건에 맞지 않습니다. 다시 입력하세요.");
+            }
+        }
+    }
+
 
 	// 회원탈퇴 시 유저의 비번을 입력받음
 	public String pwCheck() {
