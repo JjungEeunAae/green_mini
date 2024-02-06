@@ -48,7 +48,7 @@ public class MenuPrint {
 	public int middleMenu() {
 		System.out.println(" ------------------[ 메뉴를 선택해주세요 ]------------------ ");
 		System.out.println(" 1.단어맞추기 | 2.랭킹 | 3.방명록 | 8.로그아웃 | 9.탈퇴 | 0.종료");
-		System.out.println(" ------------------------------------------------------ ");
+		System.out.println(" -------------------------------------------------------- ");
 		int middleMenu = sc.nextInt();
 		return middleMenu;
 	}
@@ -59,7 +59,7 @@ public class MenuPrint {
 				+ "                       단어맞추기                      " + Font.RESET);
 		System.out.println(" -----------------[ 메뉴를 선택해주세요 ]--------------- ");
 		System.out.println("1.색상 | 2.동물 | 3.음식 | 8.로그아웃 | 9.이전메뉴 | 0.종료");
-		System.out.println(" --------------------------------------------------- ");
+		System.out.println(" ---------------------------------------------------- ");
 		int gameMenu = sc.nextInt(); // 메뉴 번호 입력받기
 		return gameMenu;
 	}
