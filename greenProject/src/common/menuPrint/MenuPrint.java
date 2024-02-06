@@ -1,9 +1,9 @@
-package db.menuPrint;
+package common.menuPrint;
 
 import java.util.Scanner;
 
-import db.input.InfoInput;
-import style.Font;
+import common.input.InfoInput;
+import common.style.Font;
 
 public class MenuPrint {
 	Scanner sc = new Scanner(System.in);

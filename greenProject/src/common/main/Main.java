@@ -1,24 +1,23 @@
-package miniproject;
+package common.main;
 
+import common.input.InfoInput;
+import common.menuPrint.MenuPrint;
+import common.style.Font;
 import db.guestBook.GuestBook;
-import db.input.InfoInput;
-import db.menuPrint.MenuPrint;
 import db.quiz.Quiz;
 import db.rank.Rank;
 import db.user.User;
 import db.user.UserVO;
-import style.Font;
 
 public class Main {
-
 	public static void main(String[] args) {
 		InfoInput input = new InfoInput(); // 회원가입 또는 로그인할 때 입력받는 값을 UserVO로 이동하는 클래스
 		MenuPrint menu = new MenuPrint(); // 메뉴가 지저분해서 클래스를 따로 생성함
 		User user = new User(); // 로그인, 회원가입, 탈퇴 등
 		Quiz quiz = new Quiz(); // 단어맞추기 게임
 		Rank rank = new Rank(); // 게임 순위
-//		MakeId    mid   = new MakeId();     // 회원가입 클래스 없어도 될듯?
 		GuestBook book = new GuestBook();
+		
 		menu.wellcome();
 		loop: while (true) {
 			int mainMenu = menu.mainMenu();
@@ -207,8 +206,7 @@ public class Main {
 				}
 				break;
 			case 2: // 회원가입 (●sdqwe12)
-//				 mid.MakeId(); 없어도 될듯?
-				input.signUpInput(); //이거만 있으면 될듯
+				input.signUpInput();
 				break;
 			default:
 				System.out

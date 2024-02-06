@@ -1,13 +1,13 @@
-package db.test;
+package test;
 
 import java.util.Scanner;
 
+import common.input.InfoInput;
+import common.menuPrint.MenuPrint;
+import common.style.Font;
 import db.guestBook.GuestBook;
-import db.input.InfoInput;
-import db.menuPrint.MenuPrint;
 import db.user.User;
 import db.user.UserVO;
-import style.Font;
 
 public class EunheeMainTest {
 	public static void main(String[] args) {

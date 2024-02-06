@@ -1,8 +1,6 @@
-package miniproject;
+package test;
 
 import java.util.Scanner;
-
-import db.test.Test;
 
 public class TestMain {
 	public static void main(String[] args) {
