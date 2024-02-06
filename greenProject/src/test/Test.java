@@ -1,4 +1,4 @@
-package db.test;
+package test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,9 +13,9 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import common.style.Font;
 import db.DBConnection;
 import db.user.UserVO;
-import style.Font;
 
 public class Test {
 	private Connection conn;

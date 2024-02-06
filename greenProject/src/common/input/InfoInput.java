@@ -1,10 +1,10 @@
-package db.input;
+package common.input;
 
 import java.util.Scanner;
 
+import common.style.Font;
 import db.user.User;
 import db.user.UserVO;
-import style.Font;
 
 public class InfoInput {
 	Scanner sc = new Scanner(System.in);
@@ -54,7 +54,7 @@ public class InfoInput {
             if (sign_pw.matches(pwRegex)) {
                 return sign_pw; // 유효한 비밀번호 반환
             } else {
-                System.out.println("비밀번호가 조건에 맞지 않습니다. 다시 입력하세요.");
+                System.err.println("비밀번호가 조건에 맞지 않습니다. 다시 입력하세요.");
             }
         }
     }

@@ -1,4 +1,4 @@
-package style;
+package common.style;
 
 public class Font {
 	public static final String RESET = "\u001B[0m"; 

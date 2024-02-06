@@ -8,9 +8,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import common.input.InfoInput;
+import common.style.Font;
 import db.DBConnection;
-import db.input.InfoInput;
-import style.Font;
 
 public class User {
 	private Connection conn; // data base connection
@@ -26,16 +26,14 @@ public class User {
 			PreparedStatement pstmt = conn.prepareStatement("select id from member where id='" + id + "'");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				System.out.println("중복된 아이디입니다. 다시 입력해주세요");
+				System.err.println("중복된 아이디입니다. 다시 입력해주세요");
 				return true;
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("사용 가능한 아이디입니다.");
+		System.out.println(Font.FONT_GREEN + "사용 가능한 아이디입니다." + Font.RESET);
 		return false;
-
 	}
 
 	// 회원가입 sdqwe12
@@ -48,12 +46,12 @@ public class User {
 			pre.setString(1, id);
 			pre.setString(2, pw);
 			pre.setString(3, name);
+			
 			pre.executeUpdate();
-
+			System.out.println(Font.FONT_GREEN + "회원가입 되었습니다!" + Font.RESET);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	// 로그인 후 유저 정보 가져오기

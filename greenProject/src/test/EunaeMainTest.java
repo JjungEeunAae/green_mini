@@ -1,12 +1,12 @@
-package db.test;
+package test;
 
 import java.util.Scanner;
 
-import db.input.InfoInput;
-import db.menuPrint.MenuPrint;
+import common.input.InfoInput;
+import common.menuPrint.MenuPrint;
+import common.style.Font;
 import db.user.User;
 import db.user.UserVO;
-import style.Font;
 
 public class EunaeMainTest {
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package sjh;
+package test.sjh;
 
 
 
@@ -16,11 +16,11 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import common.style.Font;
 import db.DBConnection;
 import db.user.UserVO;
-import style.Font;
 
-public class test {
+public class SjhTest {
 	private Connection conn;
 	private Statement stmt;
 	private ResultSet rs;

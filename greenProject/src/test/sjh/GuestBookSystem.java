@@ -1,4 +1,4 @@
-package sjh;
+package test.sjh;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
