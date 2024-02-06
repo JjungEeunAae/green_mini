@@ -4,6 +4,7 @@ import db.guestBook.GuestBook;
 import db.input.InfoInput;
 import db.menuPrint.MenuPrint;
 import db.quiz.Quiz;
+import db.rank.Rank;
 import db.user.User;
 import db.user.UserVO;
 import style.Font;
@@ -15,6 +16,7 @@ public class Main {
 		MenuPrint menu = new MenuPrint(); // 메뉴가 지저분해서 클래스를 따로 생성함
 		User user = new User(); // 로그인, 회원가입, 탈퇴 등
 		Quiz quiz = new Quiz(); // 단어맞추기 게임
+		Rank rank = new Rank(); // 게임 순위
 //		MakeId    mid   = new MakeId();     // 회원가입 클래스 없어도 될듯?
 		GuestBook book = new GuestBook();
 		menu.wellcome();
@@ -76,8 +78,8 @@ public class Main {
 						case 2: // 랭킹 기능
 							int rankMenu = menu.rankMenu();
 							switch (rankMenu) {
-							case 1: // 목록조회 (●eunhee)
-
+							case 1: // 목록조회 (●eunae)
+								rank.rankRead();
 								break;
 							case 9:
 								System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN
