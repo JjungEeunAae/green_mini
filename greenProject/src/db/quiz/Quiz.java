@@ -45,7 +45,6 @@ public class Quiz {
 		}
 		score = 0;
 	}
-	
 	public void score(int j) {
 		int score1 = 5;
 		int score2 = 3;
