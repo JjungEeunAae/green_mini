@@ -1,5 +1,6 @@
 package miniproject;
 
+import db.guestBook.GuestBook;
 import db.input.InfoInput;
 import db.menuPrint.MenuPrint;
 import db.quiz.Quiz;
@@ -15,6 +16,7 @@ public class Main {
 		User user = new User(); // 로그인, 회원가입, 탈퇴 등
 		Quiz quiz = new Quiz(); // 단어맞추기 게임
 //		MakeId    mid   = new MakeId();     // 회원가입 클래스 없어도 될듯?
+		GuestBook book = new GuestBook();
 		menu.wellcome();
 		loop: while (true) {
 			int mainMenu = menu.mainMenu();
@@ -90,7 +92,7 @@ public class Main {
 							int guestBookMenu = menu.guestBookMenu();
 							switch (guestBookMenu) {
 							case 1: // 목록조회 (●eunhee)
-
+								book.listView();
 								break;
 							case 2: // 글 등록 (●jihun)
 
