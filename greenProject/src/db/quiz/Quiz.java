@@ -1,26 +1,14 @@
 package db.quiz;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-import db.user.UserVO;
-
 public class Quiz {
-	private Connection conn; // data base connection
-	private Statement stmt; // sql query 실행
-	private ResultSet rs; // query result
-	private String sql; // query를 담을 String타입 변수
-	
 	QuizDB qdb = new QuizDB();
 
 	Scanner sc = new Scanner(System.in);
-	String answer = "";
 	int score;
 	
 	public void game(String subject, String mem_id,String mem_name) {
@@ -31,9 +19,7 @@ public class Quiz {
 
 		word.addAll(qdb.wordList(subject));
 
-		Collections.shuffle(word);
-
-		aa: for (int i = 0; i < word.size(); i++) {
+		aa: for (int i = 0; i < 5; i++) {
 			hint = qdb.hintList(word.get(i));
 			System.out.println(i + 1 + "번째 문제");
 			
@@ -59,7 +45,6 @@ public class Quiz {
 		}
 		score = 0;
 	}
-	
 	public void score(int j) {
 		int score1 = 5;
 		int score2 = 3;

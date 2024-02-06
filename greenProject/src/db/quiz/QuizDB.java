@@ -16,13 +16,11 @@ public class QuizDB {
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
-	// 프로젝트 DB에 맞게 컬럼명 변경하기
-	
 	public List<String> wordList(String subject) {
 		List<String> word = new ArrayList<String>();
 		try {
 			con = DriverManager.getConnection(DBConnection.JDBC_URL, DBConnection.USERNAME, DBConnection.PASSWORD);
-			pstmt = con.prepareStatement("select * from word where `subject`='" + subject + "' order by floor(rand()*10)");
+			pstmt = con.prepareStatement("select * from word where `subject`='" + subject+"'");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				word.add(rs.getString("word"));
@@ -38,13 +36,12 @@ public class QuizDB {
 				e.printStackTrace();
 			}
 		}
-		
+		Collections.shuffle(word);
 		return word;
 	}
 	
 	public List<String> hintList(String word) {
 		List<String> hint = new ArrayList<String>();
-		List<String> hints = new ArrayList<String>();
 		try {
 			con = DriverManager.getConnection(DBConnection.JDBC_URL, DBConnection.USERNAME, DBConnection.PASSWORD);
 			pstmt =  con.prepareStatement("select word,group_concat(hint) from word_hint where word ='"+ word+"'");
@@ -52,8 +49,6 @@ public class QuizDB {
 
 			while (rs.next()) {
 				hint = Arrays.asList(rs.getString("group_concat(hint)").split(","));
-				hints = hint;
-				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,15 +61,15 @@ public class QuizDB {
 				e.printStackTrace();
 			}
 		}
-		Collections.shuffle(hints);
-		
-		return hints;
+		Collections.shuffle(hint);
+		return hint;
 	}
 	
 	public int wordGame(String answer,String hint,int j) {
 		try {
 			con = DriverManager.getConnection(DBConnection.JDBC_URL, DBConnection.USERNAME, DBConnection.PASSWORD);
-			pstmt = con.prepareStatement("select * from word_hint where word='"+answer+"' and hint='"+hint+"'");
+			pstmt = con.prepareStatement(
+					"select * from word_hint where word='"+answer+"' and hint='"+hint+"'");
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
