@@ -54,4 +54,76 @@ public class GuestBook {
 			}
 		};
 	}
+	
+	// 방명록 등록
+	public int guestBookInsert(String id, String title, String content) {
+		int result = 0;
+	    try (Connection conn = DriverManager.getConnection(DBConnection.JDBC_URL, DBConnection.USERNAME, DBConnection.PASSWORD);
+	         PreparedStatement pre = conn.prepareStatement("INSERT INTO guest_book(id, title, content, write_date) VALUES (?,?,?,NOW())")) {
+	        
+	        pre.setString(1, id);
+	        pre.setString(2, title);
+	        pre.setString(3, content);
+	        
+	        result = pre.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    // 결과 반환
+	    return result > 0 ? 1 : 0;
+	}
+	
+	// 방명록 삭제할 목록 보여주기
+	public void deleteGuestBookList(String id) {
+	 try (Connection conn = DriverManager.getConnection(DBConnection.JDBC_URL, DBConnection.USERNAME, DBConnection.PASSWORD);
+	         PreparedStatement pre = conn.prepareStatement("SELECT guest_no, title, content, DATE_FORMAT(write_date, '%Y-%m-%d') AS write_date FROM guest_book WHERE id = ?")) {
+	        
+	        pre.setString(1, id);
+	        ResultSet rs = pre.executeQuery();
+	        
+	        if (rs.next()) {
+	            System.out.println("[글번호]\t[제목]\t[내용]\t  [등록일]");
+	            do {
+	                System.out.println(rs.getString("guest_no") + "\t"
+	                        + rs.getString("title") + "\t"
+	                        + rs.getString("content") + "\t"
+	                        + rs.getString("write_date"));
+	            } while (rs.next());
+	        } else {
+	            System.out.println("작성한 글이 없습니다.");
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	// 방명록 삭제 기능
+	public int guestBookDelete(String id, int guestNo) {
+		int result = 0;
+		try {
+			conn = DriverManager.getConnection(DBConnection.JDBC_URL, DBConnection.USERNAME, DBConnection.PASSWORD);
+			String sql = "DELETE FROM guest_book WHERE guest_no = ? AND id = ?";
+			
+			pr = conn.prepareStatement(sql);
+			pr.setInt(1, guestNo);
+			pr.setString(2, id);
+			
+			result = pr.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if(result > 0) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	
+	
+	
+	
+	
 }

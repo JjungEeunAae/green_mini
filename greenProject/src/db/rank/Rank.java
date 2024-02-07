@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import common.style.Font;
 import db.DBConnection;
 
 public class Rank {
@@ -15,7 +16,7 @@ public class Rank {
 	private ResultSet rs;
 	private String sql;
 	
-	public void rankRead() {
+	public void rankRead(String id) {
 		try {
 			conn = DriverManager.getConnection(DBConnection.JDBC_URL, DBConnection.USERNAME, DBConnection.PASSWORD);
 			sql = "SELECT CASE "
@@ -33,9 +34,18 @@ public class Rank {
 			rs = pr.executeQuery();
 			
 			System.out.println("❤️랭크는 10등까지만 보입니다❤️");
-			System.out.println("[id]\t[점수] \t  [등록일]");
+			System.out.println("[순위]\t[id]\t[]\t[점수] \t  [등록일]");
+			int rank = 0;
 			while(rs.next()) {
-				System.out.println(rs.getString("id") + "\t " + rs.getString("score") + "점\t " + rs.getString("in_date"));
+				String myId = Font.FONT_GREEN + rs.getString("id") + Font.RESET + "\t\t ";
+				rank++;
+				if(rs.getString("id").equals(id)) {
+					System.out.println(rank + "\t" + myId +
+										rs.getString("score") + "점\t " + rs.getString("in_date"));
+				} else {					
+					System.out.println(rank + "\t" + rs.getString("id") + "\t " +
+										rs.getString("score") + "점\t " + rs.getString("in_date"));
+				}
 			}
 			System.out.println();
 		} catch (SQLException e) {

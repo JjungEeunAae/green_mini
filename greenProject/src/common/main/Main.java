@@ -1,5 +1,7 @@
 package common.main;
 
+import java.util.Scanner;
+
 import common.input.InfoInput;
 import common.menuPrint.MenuPrint;
 import common.style.Font;
@@ -17,6 +19,7 @@ public class Main {
 		Quiz quiz = new Quiz(); // 단어맞추기 게임
 		Rank rank = new Rank(); // 게임 순위
 		GuestBook book = new GuestBook();
+		Scanner sc = new Scanner(System.in);
 		
 		menu.wellcome();
 		loop: while (true) {
@@ -57,7 +60,7 @@ public class Main {
 								case 8: // 로그아웃
 									System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN + "      [ 로그아웃 완료! ]     "
 											+ Font.RESET);
-									user = null;
+									mem = null;
 									break mLoop;
 								case 9:
 									// 이전메뉴
@@ -78,7 +81,7 @@ public class Main {
 							int rankMenu = menu.rankMenu();
 							switch (rankMenu) {
 							case 1: // 목록조회 (●eunae)
-								rank.rankRead();
+								rank.rankRead(mem.getId());
 								break;
 							case 9:
 								System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN
@@ -96,15 +99,35 @@ public class Main {
 								book.listView();
 								break;
 							case 2: // 글 등록 (●jihun)
-
+								System.out.println(mem.getName() + "님, 게시글 등록이 시작됩니다.");
+								System.out.println("제목을 입력해주세요.");
+								String title = sc.next();
+								System.out.println("내용을 입력해주세요.");
+								String content = sc.next();
+								
+								int result = book.guestBookInsert(mem.getId(), title, content);
+								if(result > 0) {
+									System.out.println(Font.FONT_GREEN + "방명록 등록이 완료되었습니다!" + Font.RESET);
+								} else {
+									System.err.println("방명록 등록이 정상적으로 진행되지 않았습니다!");
+								}
 								break;
 							case 3: // 글 삭제 (●jihun)
-
+								book.deleteGuestBookList(mem.getId());
+								System.out.println("어떤 글을 삭제하겠습니까?");
+								int guestNo = sc.nextInt();
+								int deleteResult = book.guestBookDelete(mem.getId(), guestNo);
+								if(deleteResult > 0) {
+									System.out.println(Font.FONT_GREEN + "=============[ 정상적으로 글이 삭제되었습니다. ]=============" + Font.RESET);
+								} else {
+									System.err.println("글번호가 올바르지 않습니다!");
+								}
+								
 								break;
 							case 8: // 로그아웃 (●eunae)
 								System.out.println(Font.BACKGROUND_WHITE + Font.FONT_BLUE
 										+ "           [ 로그아웃 완료! ]          " + Font.RESET);
-								user = null;
+								mem = null;
 								break mLoop;
 							case 9: // 이전메뉴
 								System.out.println(Font.BACKGROUND_WHITE + Font.FONT_GREEN
@@ -117,14 +140,12 @@ public class Main {
 							default:
 								System.out.println(Font.BACKGROUND_BLACK + Font.FONT_RED
 										+ "메뉴 외의 번호를 입력하셨습니다. 다시 입력해주세요!" + Font.RESET);
-							}
-							;
-
+							};
 							break;
 						case 8:
 							System.out.println(Font.BACKGROUND_WHITE + Font.FONT_BLUE
 									+ "           [ 로그아웃 완료! ]          " + Font.RESET);
-							user = null;
+							mem = null;
 							break mLoop;
 						case 9: // 회원탈퇴 (●eunae)
 							int userMenu = menu.signOutMenu();

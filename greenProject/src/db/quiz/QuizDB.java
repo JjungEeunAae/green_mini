@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import common.style.Font;
 import db.DBConnection;
 
 public class QuizDB {
@@ -73,14 +74,15 @@ public class QuizDB {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				System.out.println("정답");
+				System.out.println(Font.FONT_GREEN + "정답" + Font.RESET);
+				System.out.println();
 				return 1;
 			}
 			else if(j < 2){
-				System.out.println("다음힌트");
+				System.out.println("다음 힌트");
 			}
 			else {
-				System.out.println("맞추지 못했습니다 다음문제");
+				System.err.println("맞추지 못했습니다.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
