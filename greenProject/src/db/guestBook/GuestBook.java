@@ -23,10 +23,11 @@ public class GuestBook {
 			// 2. 쿼리를 짜서 java를 통해 sql 쿼리를 실행한다.
 			
 			pr = conn.prepareStatement("SELECT id"
-										  + ", score"
-										  + ", DATE_FORMAT(in_date, '%Y-%m-%d') AS \"in_date\" "
-									  + "FROM `rank` "
-									  + "ORDER BY score DESC");
+										  + ", title"
+										  + ", content"
+										  + ", DATE_FORMAT(write_date, '%Y-%m-%d') AS \"write_date\" "
+									  + "FROM guest_book "
+									  + "ORDER BY write_date DESC");
 			rs = pr.executeQuery();	// rs(결과를 담는 바구니)
 			
 			// 3. 나는 어떠한 모습으로 유저에게 내용을 보여줄 것인가?
@@ -34,12 +35,13 @@ public class GuestBook {
 			
 			int num = 1;
 			
-			System.out.println("순위\t아이디\t점수\t등록일");
+			System.out.println("글번호\t아이디\t제목\t내용\t등록일");
 			
 			while (rs.next()) {
 				System.out.println((num++) + "\t" + rs.getString("id") + "\t"  
-			                                      + rs.getString("score") 
-		                                          + "\t" + rs.getString("in_date"));
+			                                      + rs.getString("title") + "\t"
+			                                      + rs.getString("content") + "\t"
+		                                          + rs.getString("write_date"));
 			}
 			System.out.println();
 		} catch (SQLException e) {
