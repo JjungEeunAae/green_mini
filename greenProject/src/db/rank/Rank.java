@@ -34,7 +34,7 @@ public class Rank {
 			rs = pr.executeQuery();
 			
 			System.out.println("❤️랭크는 10등까지만 보입니다❤️");
-			System.out.println("[순위]\t[id]\t[]\t[점수] \t  [등록일]");
+			System.out.println("[순위]\t[id]\t[점수] \t  [등록일]");
 			int rank = 0;
 			while(rs.next()) {
 				String myId = Font.FONT_GREEN + rs.getString("id") + Font.RESET + "\t\t ";
